@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 export function KeyClicker (props) {
     const audioRef = useRef(null);
@@ -11,7 +11,8 @@ export function KeyClicker (props) {
         <div>
             <button 
              id={props.id} 
-             onClick={() => audioRef.current.play()} 
+             onClick={() =>
+                audioRef.current.play()}
             className="button is-primary is-medium drum-pad">
             {props.id}</button>
                 <audio 

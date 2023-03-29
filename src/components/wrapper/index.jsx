@@ -1,7 +1,11 @@
 import { KeyClicker } from "../keyclicker"
+import { useState, useRef } from 'react'
 import './style.css';
 
 export function Wrapper() {
+    const [pressedKey, setPressedKey] = useState(null);
+
+
     const keyClickers = [
         { id: 'Q', src: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-1.mp3' },
         { id: 'W', src: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-2.mp3' },
@@ -14,6 +18,10 @@ export function Wrapper() {
         { id: 'C', src: 'https://s3.amazonaws.com/freecodecamp/drums/Cev_H2.mp3' },
       ];
 
+      const handleKeyClickerClick = (clickedKey) => {
+        setPressedKey(clickedKey)
+      };
+
     return (
     <div id="drum-machine" className="card container is-primary">
         <h1>Drumkit</h1>
@@ -24,6 +32,8 @@ export function Wrapper() {
                 key={keyClicker.id}
                 id={keyClicker.id}
                 src={keyClicker.src}
+                isPressed={keyClicker.id === pressedKey}
+                onClick={() => handleKeyClickerClick(keyClicker.id)}
             />
            ))}
            </div>
