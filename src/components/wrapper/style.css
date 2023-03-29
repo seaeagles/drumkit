@@ -1,0 +1,10 @@
+.key-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 4rem);
+  grid-gap: 5px;
+}
+
+#drum-machine {
+    height: auto;
+    width: 70%;
+}

@@ -3,7 +3,7 @@ import './App.css'
 import { Wrapper } from './components/wrapper'
 
 function App() {
-  const [count, setCount] = useState(0)
+  // const [input, setInput] = useState('');
 
   return (
     <div className="App">

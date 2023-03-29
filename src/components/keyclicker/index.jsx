@@ -13,8 +13,13 @@ export function KeyClicker (props) {
              id={props.id} 
              onClick={() => audioRef.current.play()} 
             className="button is-primary is-medium drum-pad">
-            Q</button>
-            <audio ref={audioRef} src={props.src} />
+            {props.id}</button>
+                <audio 
+                    ref={audioRef} 
+                    src={props.src} 
+                    className="clip"
+                    id={props.id}
+                />
         </div>
     )
 }
