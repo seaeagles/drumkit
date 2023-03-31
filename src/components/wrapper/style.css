@@ -2,9 +2,10 @@
   display: grid;
   grid-template-columns: repeat(3, 4rem);
   grid-gap: 5px;
+  justify-content: center;
 }
 
 #drum-machine {
     height: auto;
-    width: 70%;
+    width: 50%;
 }

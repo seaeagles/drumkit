@@ -1,10 +1,11 @@
 import { KeyClicker } from "../keyclicker"
-import { useState, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import './style.css';
 
 export function Wrapper() {
     const [pressedKey, setPressedKey] = useState(null);
     const [clipName, setClipName] = useState('');
+    const audioRefs = useRef({})
 
 
     const keyClickers = [
@@ -20,13 +21,35 @@ export function Wrapper() {
     ];
 
       const handleKeyClickerClick = (clickedKey, clipName) => {
-        setPressedKey(clickedKey)
+        setPressedKey(keyPressed)
         setClipName(clipName)
+        const audio = audioRefs.current[clickedKey]
+        console.log(audio)
+        audio.currentTime = 0
+        audio.play()
       };
+
+      useEffect(() => {
+        const handleKeyDown = (event) => {
+          const keyPressed = event.key.toUpperCase();
+          const keyClicker = keyClickers.find((keyClicker) => keyClicker.id === keyPressed);
+          if (keyClicker) {
+              setPressedKey(keyPressed)
+              setClipName(keyClicker.name)
+              const audio = audioRefs.current[keyPressed]
+              audio.currentTime = 0;
+              audio.play()
+          }
+        };
+        document.addEventListener('keydown', handleKeyDown);
+        return () => {
+          document.removeEventListener('keydown', handleKeyDown);
+        };
+      }, []);
 
     return (
     <div id="drum-machine" className="card container is-primary">
-        <h1>Drumkit</h1>
+      <h1>Drumkit</h1>
         <div id="display" className="card-content">
             {clipName}
             <div className="key-grid">

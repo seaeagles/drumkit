@@ -11,8 +11,10 @@ export function KeyClicker (props) {
         <div>
             <button 
              id={props.id} 
-             onClick={() =>
-                audioRef.current.play()}
+             onClick={() => {
+                audioRef.current.currentTime = 0;
+                audioRef.current.play();
+              }}
             className="button is-primary is-medium drum-pad">
             {props.id}
             <audio 
