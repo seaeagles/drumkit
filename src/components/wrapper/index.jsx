@@ -21,7 +21,7 @@ export function Wrapper() {
     ];
 
       const handleKeyClickerClick = (clickedKey, clipName) => {
-        setPressedKey(keyPressed)
+        setPressedKey(clickedKey)
         setClipName(clipName)
         const audio = audioRefs.current[clickedKey]
         console.log(audio)
@@ -33,10 +33,11 @@ export function Wrapper() {
         const handleKeyDown = (event) => {
           const keyPressed = event.key.toUpperCase();
           const keyClicker = keyClickers.find((keyClicker) => keyClicker.id === keyPressed);
-          if (keyClicker) {
+          if (keyClicker?.name) {
               setPressedKey(keyPressed)
               setClipName(keyClicker.name)
-              const audio = audioRefs.current[keyPressed]
+              // const audio = audioRefs.current[keyPressed]
+              const audio = new Audio(keyClicker.src);
               audio.currentTime = 0;
               audio.play()
           }
@@ -60,6 +61,7 @@ export function Wrapper() {
                 src={keyClicker.src}
                 isPressed={keyClicker.id === pressedKey}
                 onClick={() => handleKeyClickerClick(keyClicker.id, keyClicker.name)}
+                audioRefs={audioRefs}
             />
            ))}
            </div>
